@@ -1,4 +1,11 @@
-import sqlite3
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker, declarative_base
 
-CONN = sqlite3.connect('company.db')
-CURSOR = CONN.cursor()
+engine = create_engine('sqlite:///drum_practice_tracker.db')
+Session = sessionmaker(bind=engine)
+session = Session()
+Base = declarative_base()
+
+from .models import User, Exercise, PracticeSession, Goal
+
+__all__ = ["User", "Exercise", "PracticeSession", "Goal"]
